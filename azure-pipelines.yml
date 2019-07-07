@@ -28,7 +28,7 @@ steps:
 - script: sed -i 's/$VERSION/$(GitVersion.NuGetVersion)/g' default/app.conf
   displayName: 'Set Version in app.conf'
 
-- script: tar --exclude='azure-pipelines.yml' --exclude='.git' --exclude='.gitignore' --exclude='GitVersion.yml' --transform 's|^|/TA-html-email/|' -czf $(Build.ArtifactStagingDirectory)/TA-html-email_$(GitVersion.NuGetVersion).tgz .
+- script: tar --exclude='azure-pipelines.yml' --exclude='.git' --exclude='.gitignore' --exclude='GitVersion.yml' --exclude='*.go' --exclude='go.*' --transform 's|^|/TA-html-email/|' -czf $(Build.ArtifactStagingDirectory)/TA-html-email_$(GitVersion.NuGetVersion).tgz .
   displayName: 'Package App'
 
 - task: PublishBuildArtifacts@1
