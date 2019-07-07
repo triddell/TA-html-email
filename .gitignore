@@ -1,1 +1,4 @@
 .DS_Store
+darwin_x86_64
+linux_x86_64
+windows_x86_64
