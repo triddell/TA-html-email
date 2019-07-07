@@ -1,0 +1,66 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <splunk-control-group label="Description">
+            <splunk-text-area name="action.html-email.param.description" id="html-email_description" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Title">
+            <splunk-text-input name="action.html-email.param.title" id="html-email_title" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="To">
+            <splunk-text-input name="action.html-email.param.smtp_to" id="html-email_smtp_to" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Source">
+            <splunk-select name="action.html-email.param.source" id="html-email_source">
+                <option value="source_markdown">Markdown ("body" field)</option>
+                <option value="source_results" selected>Search Results</option>
+            </splunk-select>
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="html-email_global_options">Global Options</label>
+        <div class="controls">
+            <label class="checkbox" for="html-email_csv">
+                <input type="checkbox" name="action.html-email.param.csv" id="html-email_csv" value="1" />Attach CSV
+            </label>
+        </div>
+        <div class="controls">
+            <label class="checkbox" for="html-email_description_include">
+                <input type="checkbox" name="action.html-email.param.description_include" id="html-email_description_include" value="1" />Include Description
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="html-email_search_results_options">Search Results Options</label>
+        <div class="controls">
+            <label class="checkbox" for="html-email_table">
+                <input type="checkbox" name="action.html-email.param.table" id="html-email_table" value="1" />Inline Table
+            </label>
+        </div>
+        <div class="controls">
+            <label class="checkbox" for="html-email_alert">
+                <input type="checkbox" name="action.html-email.param.alert" id="html-email_alert" value="1" />Link to Alert
+            </label>
+        </div>
+        <div class="controls">
+            <label class="checkbox" for="html-email_results">
+                <input type="checkbox" name="action.html-email.param.results" id="html-email_results" value="1" />Link to Search Results
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Alert Color">
+            <splunk-color-picker name="action.html-email.param.alert_color" id="html-email_alert_color" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Search Results Color">
+            <splunk-color-picker name="action.html-email.param.results_color" id="html-email_results_color" />
+        </splunk-control-group>
+    </div>
+</form>

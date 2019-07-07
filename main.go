@@ -17,7 +17,7 @@ import (
 
 func main() {
 
-	logger, _ := os.OpenFile(os.Getenv("SPLUNK_HOME")+"/var/log/splunk/html_email.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0660)
+	logger, _ := os.OpenFile(os.Getenv("SPLUNK_HOME")+"/var/log/splunk/html-email.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0660)
 	defer logger.Close()
 	log.SetOutput(logger)
 	formatter := &log.TextFormatter{

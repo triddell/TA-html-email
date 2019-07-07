@@ -1,0 +1,84 @@
+<setup>
+  <block title="SMTP - Connection" endpoint="configs/conf-alert_actions" entity="html-email">
+    <input field="param.smtp_host">
+      <label>SMTP Mail Host</label>
+      <type>text</type>
+    </input>
+    <input field="param.smtp_port">
+      <label>SMTP Mail Port</label>
+      <type>text</type>
+    </input>
+    <input field="param.smtp_username">
+      <label>SMTP Username</label>
+      <type>text</type>
+    </input>
+    <input field="param.smtp_password">
+      <label>SMTP Password (not stored encrypted)</label>
+      <type>password</type>
+    </input>
+    <input field="param.smtp_secure">
+      <label>Use Secure Connection</label>
+      <type>bool</type>
+    </input>
+    <input field="param.smtp_secure_verify">
+      <label>Verify SMTP Server Certificate</label>
+      <type>bool</type>
+    </input>
+    <input field="param.smtp_auth">
+      <label>Use SMTP Authentication</label>
+      <type>bool</type>
+    </input>
+  </block>
+  <block title="SMTP - Authentication" endpoint="storage/passwords" entity="_new">
+  <input field="name">
+    <label>SMTP Username</label>
+    <type>text</type>
+  </input>
+  <input field="password">
+    <label>SMTP Password</label>
+    <type>password</type>
+  </input>
+  </block>
+  <block title="HTML Email - Configurations" endpoint="configs/conf-alert_actions" entity="html-email">
+    <input field="param.smtp_from">
+      <label>SMTP From Email Address</label>
+      <type>text</type>
+    </input>
+    <input field="param.logo_url">
+      <label>Logo URL</label>
+      <type>text</type>
+    </input>
+    <input field="param.logo_link">
+      <label>Logo Link</label>
+      <type>text</type>
+    </input>
+    <input field="param.signature">
+      <label>Signature</label>
+      <type>text</type>
+    </input>
+    <input field="param.name">
+      <label>Signature Name</label>
+      <type>text</type>
+    </input>
+    <input field="param.url_host_port">
+      <label>Override Link URL Host:Port</label>
+      <type>text</type>
+    </input>
+    <input field="param.url_scheme">
+      <label>Override Link URL Scheme</label>
+      <type>text</type>
+    </input>
+    <input field="param.table_max_cols">
+      <label>Inline Table Max Columns</label>
+      <type>text</type>
+    </input>
+    <input field="param.table_max_rows">
+      <label>Inline Table Max Rows</label>
+      <type>text</type>
+    </input>
+    <input field="param.results_max_raw_gz_bytes">
+      <label>Max Raw Search Results Processing Size (in bytes)</label>
+      <type>text</type>
+    </input>
+  </block>
+</setup>

@@ -11,7 +11,38 @@ steps:
     version: 1.12.6
 
 - script: |
-    GOOS=darwin GOARCH=amd64 go build -o darwin_x86_64/bin/html_email
-    GOOS=linux GOARCH=amd64 go build -o linux_x86_64/bin/html_email
-    GOOS=windows GOARCH=amd64 go build -o windows_x86_64/bin/html_email.exe
-  displayName: 'Go Builds'
+    GOOS=darwin GOARCH=amd64 go build -o darwin_x86_64/bin/html-email
+    GOOS=linux GOARCH=amd64 go build -o linux_x86_64/bin/html-email
+    GOOS=windows GOARCH=amd64 go build -o windows_x86_64/bin/html-email.exe
+  displayName: 'Go Build'
+
+- task: NuGetCommand@2
+  inputs:
+    command: custom
+    arguments: install GitVersion.CommandLine -Version 4.0.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
+  displayName: 'Install GitVersion'
+
+- script: mono $(Build.BinariesDirectory)/tools/GitVersion.CommandLine/tools/GitVersion.exe /output buildserver /nofetch
+  displayName: 'Determine Version'
+
+- script: sed -i 's/$VERSION/$(GitVersion.NuGetVersion)/g' default/app.conf
+  displayName: 'Set Version in app.conf'
+
+- script: tar --exclude='azure-pipelines.yml' --exclude='.git' --exclude='.gitignore' --exclude='GitVersion.yml' --transform 's|^|/TA-html-email/|' -czf $(Build.ArtifactStagingDirectory)/TA-html-email_$(GitVersion.NuGetVersion).tgz .
+  displayName: 'Package App'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifact'
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)/TA-html-email_$(GitVersion.NuGetVersion).tgz
+    artifactName: 'TA-html-email'
+
+- task: GithubRelease@0 
+  displayName: 'Create GitHub Release'      
+  inputs:
+    gitHubConnection: triddell-Releases
+    repositoryName: triddell/TA-html-email
+    tagSource: manual
+    tag: $(GitVersion.NuGetVersion)      
+    assets: $(Build.ArtifactStagingDirectory)/*.tgz
+  condition: and(succeeded(), eq('true', variables['CUT_RELEASE']))
