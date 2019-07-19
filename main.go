@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
-	"github.com/go-gomail/gomail"
+	gomail "github.com/go-mail/mail"
 	"github.com/matcornic/hermes/v2"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -26,8 +26,6 @@ func main() {
 		DisableColors:   true,
 	}
 	log.SetFormatter(formatter)
-	//log.SetLevel(log.InfoLevel)
-	log.SetLevel(log.DebugLevel)
 
 	var err error
 	defer func() {
@@ -59,10 +57,6 @@ func main() {
 			return
 		}
 
-		log.WithFields(log.Fields{
-			"json_payload": payloadInput,
-		}).Debug("Configuration")
-
 		p := &payload{}
 
 		err = json.Unmarshal([]byte(payloadInput), p)
@@ -72,6 +66,12 @@ func main() {
 			}).Error("Error unmarshalling JSON payload")
 			return
 		}
+
+		log.SetLevel(getLogLevel(p.Configuration.LogLevel))
+
+		log.WithFields(log.Fields{
+			"json_payload": payloadInput,
+		}).Debug("Configuration")
 
 		h := hermes.Hermes{
 			Product: hermes.Product{
@@ -96,7 +96,7 @@ func main() {
 		if err != nil {
 			log.WithFields(log.Fields{
 				"error": err.Error(),
-			}).Error("Error geting file size of raw seach results")
+			}).Error("Error geting file size of raw search results")
 			return
 		}
 		if fi.Size() <= int64(maxRawGzBytes) {
@@ -332,11 +332,31 @@ func main() {
 			return
 		}
 
-		if p.Configuration.SMTPSecure == "1" {
+		var password string
 
-			d := gomail.NewDialer(p.Configuration.SMTPHost, port, p.Configuration.SMTPUsername, p.Configuration.SMTPPassword)
+		if p.Configuration.SMTPUsername != "" {
 
-			if p.Configuration.SMTPSecureVerify != "1" {
+			//Get SMTP Password
+			password, err = retrieveSMTPPassword(p.ServerURI, p.SessionKey)
+			if err != nil {
+				log.WithFields(log.Fields{
+					"error": err.Error(),
+				}).Error("Error retrieving SMTP password")
+				return
+			}
+		}
+
+		if p.Configuration.SMTPTls == "1" || p.Configuration.SMTPStarttls == "1" {
+
+			var d *gomail.Dialer
+
+			d = gomail.NewDialer(p.Configuration.SMTPHost, port, p.Configuration.SMTPUsername, password)
+
+			if p.Configuration.SMTPStarttls == "1" {
+				d.StartTLSPolicy = gomail.MandatoryStartTLS
+			}
+
+			if p.Configuration.SMTPVerify != "1" {
 				d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 			}
 
@@ -371,7 +391,7 @@ func main() {
 
 		} else {
 
-			d := gomail.Dialer{Host: p.Configuration.SMTPHost, Port: port}
+			d := gomail.Dialer{Host: p.Configuration.SMTPHost, Port: port, Username: p.Configuration.SMTPUsername, Password: password}
 			if err := d.DialAndSend(m); err != nil {
 				log.WithFields(log.Fields{
 					"app":         p.App,
@@ -424,4 +444,21 @@ func main() {
 		log.Error("Error: no \"--execute\" flag as first program argument")
 	}
 
+}
+
+func getLogLevel(logLevel string) log.Level {
+	switch strings.ToLower(logLevel) {
+	case "debug":
+		return log.DebugLevel
+	case "info":
+		return log.InfoLevel
+	case "warn":
+		return log.WarnLevel
+	case "error":
+		return log.ErrorLevel
+	case "fatal":
+		return log.FatalLevel
+	default:
+		return log.InfoLevel
+	}
 }

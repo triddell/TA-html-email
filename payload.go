@@ -9,6 +9,7 @@ type payload struct {
 		Csv                  string
 		Description          string
 		DescriptionInclude   string `json:"description_include"`
+		LogLevel             string `json:"log_level"`
 		LogoLink             string `json:"logo_link"`
 		LogoURL              string `json:"logo_url"`
 		Name                 string
@@ -18,10 +19,10 @@ type payload struct {
 		Signature            string
 		SMTPFrom             string `json:"smtp_from"`
 		SMTPHost             string `json:"smtp_host"`
-		SMTPPassword         string `json:"smtp_password"`
 		SMTPPort             string `json:"smtp_port"`
-		SMTPSecure           string `json:"smtp_secure"`
-		SMTPSecureVerify     string `json:"smtp_secure_verify"`
+		SMTPVerify           string `json:"smtp_verify"`
+		SMTPStarttls         string `json:"smtp_starttls"`
+		SMTPTls              string `json:"smtp_tls"`
 		SMTPTo               string `json:"smtp_to"`
 		SMTPUsername         string `json:"smtp_username"`
 		Source               string

@@ -1,23 +1,30 @@
 <form class="form-horizontal form-complex">
     <div class="control-group">
+        <splunk-control-group label="To">
+            <splunk-text-area name="action.html-email.param.smtp_to" id="html-email_smtp_to" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <span class="help-block" style="display: block; position: static; width: auto; margin-left: 0;">
+                A comma-separated list of email addresses.
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+            <splunk-control-group label="Subject">
+                <splunk-text-input name="action.html-email.param.title" id="html-email_title" />
+            </splunk-control-group>
+        </div>
+    <div class="control-group">
         <splunk-control-group label="Description">
             <splunk-text-area name="action.html-email.param.description" id="html-email_description" />
         </splunk-control-group>
     </div>
     <div class="control-group">
-        <splunk-control-group label="Title">
-            <splunk-text-input name="action.html-email.param.title" id="html-email_title" />
-        </splunk-control-group>
-    </div>
-    <div class="control-group">
-        <splunk-control-group label="To">
-            <splunk-text-input name="action.html-email.param.smtp_to" id="html-email_smtp_to" />
-        </splunk-control-group>
-    </div>
-    <div class="control-group">
         <splunk-control-group label="Source">
             <splunk-select name="action.html-email.param.source" id="html-email_source">
-                <option value="source_markdown">Markdown ("body" field)</option>
+                <option value="source_markdown">Markdown (experimental)</option>
                 <option value="source_results" selected>Search Results</option>
             </splunk-select>
         </splunk-control-group>
@@ -61,6 +68,49 @@
     <div class="control-group">
         <splunk-control-group label="Search Results Color">
             <splunk-color-picker name="action.html-email.param.results_color" id="html-email_results_color" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="From">
+            <splunk-text-input name="action.html-email.param.smtp_from" id="html-email_smtp_from" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <span class="help-block" style="display: block; position: static; width: auto; margin-left: 0;">
+                A single email address.
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Logo URL">
+            <splunk-text-input name="action.html-email.param.logo_url" id="html-email_logo_url" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Logo Link">
+            <splunk-text-input name="action.html-email.param.logo_link" id="html-email_logo_link" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Signature">
+            <splunk-text-input name="action.html-email.param.signature" id="html-email_signature" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Signature Name">
+            <splunk-text-input name="action.html-email.param.name" id="html-email_name" />
+        </splunk-control-group>
+    </div>
+    <div class="control-group">
+        <splunk-control-group label="Logging Level">
+            <splunk-select name="action.html-email.param.log_level" id="html-email_log_level">
+                <option value="debug">debug</option>
+                <option value="info">info</option>
+                <option value="warn">warn</option>
+                <option value="error">error</option>
+                <option value="fatal">fatal</option>
+            </splunk-select>
         </splunk-control-group>
     </div>
 </form>

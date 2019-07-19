@@ -43,6 +43,6 @@ steps:
     gitHubConnection: triddell-Releases
     repositoryName: triddell/TA-html-email
     tagSource: manual
-    tag: $(GitVersion.NuGetVersion)      
+    tag: $(GitVersion.NuGetVersion)
     assets: $(Build.ArtifactStagingDirectory)/*.tgz
   condition: and(succeeded(), eq('true', variables['CUT_RELEASE']))
