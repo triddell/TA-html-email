@@ -16,18 +16,17 @@ steps:
     GOOS=windows GOARCH=amd64 go build -o windows_x86_64/bin/html-email.exe
   displayName: 'Go Build'
 
-- task: UseGitVersion@5
-  displayName: Determine Version Number
+- task: NuGetCommand@2
   inputs:
-    versionSpec: '5.x'
+    command: custom
+    arguments: install GitVersion.Tool -Version 5.7.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
+  displayName: 'Install GitVersion'
 
-- task: Bash@3
-  displayName: 'Set Version Number in app.conf'
-  inputs:
-    targetType: 'inline'
-    script: sed -i 's/$VERSION/$GITVERSIONNUMBER/g' default/app.conf
-  env:
-    GITVERSIONNUMBER: $(GitVersion.SemVer)
+- script: $(Build.BinariesDirectory)/tools/GitVersion.Tool/tools/GitVersion.exe /output buildserver /nofetch
+  displayName: 'Determine Version'
+
+- script: sed -i 's/$VERSION/$(GitVersion.NuGetVersion)/g' default/app.conf
+  displayName: 'Set Version in app.conf'
 
 - script: tar --exclude='azure-pipelines.yml' --exclude='.git' --exclude='.gitignore' --exclude='GitVersion.yml' --exclude='Makefile' --exclude='*.go' --exclude='go.*' --transform 's|^|/TA-html-email/|' -czf $(Build.ArtifactStagingDirectory)/TA-html-email_$(GitVersion.NuGetVersion).tgz .
   displayName: 'Package App'
