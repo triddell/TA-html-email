@@ -22,7 +22,7 @@ steps:
     arguments: install GitVersion.CommandLine -Version 5.7.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
   displayName: 'Install GitVersion'
 
-- script: mono $(Build.BinariesDirectory)/tools/GitVersion.CommandLine/tools/GitVersion.exe /output buildserver /nofetch
+- script: mono GitVersion.exe /output buildserver /nofetch
   displayName: 'Determine Version'
 
 - script: sed -i 's/$VERSION/$(GitVersion.NuGetVersion)/g' default/app.conf
