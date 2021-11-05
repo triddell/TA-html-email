@@ -96,7 +96,7 @@ func main() {
 		if err != nil {
 			log.WithFields(log.Fields{
 				"error": err.Error(),
-			}).Error("Error geting file size of raw search results")
+			}).Error("Error getting file size of raw search results")
 			return
 		}
 		if fi.Size() <= int64(maxRawGzBytes) {
