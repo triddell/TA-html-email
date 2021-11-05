@@ -27,9 +27,9 @@ steps:
     versionSpec: '5.7.0'
 
 - task: gitversion/execute@0
-    inputs:
-      useConfigFile: true
-      configFilePath: '$(Build.SourcesDirectory)/GitVersion.yml'
+  inputs:
+    useConfigFile: true
+    configFilePath: '$(Build.SourcesDirectory)/GitVersion.yml'
 
 - script: sed -i 's/$VERSION/$(GitVersion.NuGetVersion)/g' default/app.conf
   displayName: 'Set Version in app.conf'
