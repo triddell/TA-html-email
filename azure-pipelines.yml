@@ -8,7 +8,7 @@ steps:
 - task: GoTool@0
   displayName: 'Go Install'
   inputs:
-    version: 1.12.6
+    version: 1.17.2
 
 - script: |
     GOOS=darwin GOARCH=amd64 go build -o darwin_x86_64/bin/html-email
@@ -19,7 +19,7 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: custom
-    arguments: install GitVersion.CommandLine -Version 4.0.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
+    arguments: install GitVersion.CommandLine -Version 5.7.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
   displayName: 'Install GitVersion'
 
 - script: mono $(Build.BinariesDirectory)/tools/GitVersion.CommandLine/tools/GitVersion.exe /output buildserver /nofetch
