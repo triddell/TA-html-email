@@ -1,5 +1,5 @@
 # TA-html-email
 
-[![Build Status](https://dev.azure.com/triddell/TA-html-email/_apis/build/status/triddell.TA-html-email?branchName=master)](https://dev.azure.com/triddell/TA-html-email/_build/latest?definitionId=1&branchName=master)
+![TA-html-email](https://github.com/triddell/TA-html-email/actions/workflows/workflow.yml/badge.svg)
 
 A Splunk add-on to send HTML-based email with rich formatting options.
