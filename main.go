@@ -217,7 +217,7 @@ func main() {
 					Instructions: "To view the search results on Splunk, please click here:",
 					Button: hermes.Button{
 						Color: p.Configuration.ResultsColor,
-						Text:  "View Search Results",
+						Text:  "Search Results",
 						Link:  u.String(),
 					}})
 			}
