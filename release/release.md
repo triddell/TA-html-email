@@ -1,3 +1,3 @@
 ### Changes:
 
-* Move from Azure DevOps build to GitHub Actions
+* Change button text to "Search Results" (removing "View" for better formatting)
