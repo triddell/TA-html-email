@@ -1,3 +1,3 @@
 ### Changes:
 
-* Change button text to "Search Results" (removing "View" for better formatting)
+* Add BodyString (body_string) field for non-multivalued email body content

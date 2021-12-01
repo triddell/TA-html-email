@@ -34,8 +34,9 @@ type payload struct {
 		URLScheme            string `json:"url_scheme"`
 	}
 	Result struct {
-		Body []string
-		To   string
+		Body       []string
+		BodyString string `json:"body_string"`
+		To         string
 	}
 	ResultsFile string `json:"results_file"`
 	ResultsLink string `json:"results_link"`

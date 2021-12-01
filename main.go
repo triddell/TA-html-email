@@ -141,7 +141,13 @@ func main() {
 				description = strings.Join(intros, "\n") + "\n\n"
 			}
 
-			markdown := description + strings.Join(p.Result.Body[:], "\n") + "\n***\n"
+			var markdown string
+
+			if len(p.Result.Body) > 0 {
+				markdown = description + strings.Join(p.Result.Body[:], "\n") + "\n***\n"
+			} else if len(p.Result.BodyString) > 0 {
+				markdown = description + p.Result.BodyString + "\n***\n"
+			}
 
 			body = hermes.Body{
 				FreeMarkdown: hermes.Markdown(markdown),
