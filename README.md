@@ -68,7 +68,7 @@ index=_internal
 ![](images/documentation.05.png)
 ![](images/documentation.06.png)
 
-### Attached `results.csv ` file contents
+### Attached `results.csv` file contents
 
 ```
 Source Type,Occurrences
@@ -81,7 +81,7 @@ mongod,547
 
 ## Debug
 
-* The application is written in Go and is included as a binary file for the darwin, linux, and windows platforms.
+* The application is written in Go and is included as individual binary files for the darwin, linux, and windows platforms.
 * The application source is available at: https://github.com/triddell/TA-html-email
 * The [Hermes](https://github.com/matcornic/hermes) project is used for the basic email formatting.
 * Application logs are written to `$SPLUNK_HOME/var/log/splunk/html-email.log` and can be searched in the `_internal` index using Splunk SPL: `index=_internal source=*html-email.log`
@@ -167,9 +167,9 @@ Lorem markdownum iners Stymphalides lorisque oreada numquam si solae virginis am
 ![](images/documentation.08.png)
 ![](images/documentation.09.png)
 
-### Markdown Example 2 (multi-value field)
+### Markdown Example 2 (multi-valued field)
 
-* When using a single-valued field, the resulting field name must be `body`
+* When using a multi-valued field, the resulting field name must be `body`
 * Options:
   * Source: `Markdown (experimental)`
   * Global Option: `Include Description`
@@ -193,8 +193,12 @@ index=_internal
 *`body`*
 ```
 | Source Type | Source |
-| :---: | --- |
+| :--: | --- |
+| html-email | /Applications/Splunk/var/log/splunk/html-email.log |
+| scheduler | /Applications/Splunk/var/log/splunk/scheduler.log |
 | splunk_search_messages | /Applications/Splunk/var/log/splunk/search_messages.log |
+| splunk_web_access | /Applications/Splunk/var/log/splunk/web_access.log |
+| splunk_web_service | /Applications/Splunk/var/log/splunk/web_service.log |
 | splunkd | /Applications/Splunk/var/log/splunk/health.log |
 | splunkd | /Applications/Splunk/var/log/splunk/metrics.log |
 | splunkd | /Applications/Splunk/var/log/splunk/splunkd.log |
