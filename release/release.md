@@ -1,3 +1,4 @@
 ### Changes:
 
-* Add BodyString (body_string) field for non-multivalued email body content
+* Add initial documentation to README
+* Update Go to 1.17
