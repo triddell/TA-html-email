@@ -6,6 +6,8 @@ A Splunk add-on to send HTML-based email with rich formatting options.
 
 ## Install
 
+Download the latest release from GitHub: [Releases](https://github.com/triddell/TA-html-email/releases)
+
 After installing the `.tgz` file, Splunk will prompt to be restarted.
 
 At the following dialog box, click *Set up later*.
@@ -137,8 +139,8 @@ Lorem markdownum iners Stymphalides lorisque oreada numquam si solae virginis am
 ### Table
  
 | Column Header 1 | Column Header 2 |
-| ------------- | :-------------: |
-| Cell Value (non-centered)   | Cell Value (centered)    |
+| --------------- | :-------------: |
+| Cell Value (non-centered) | Cell Value (centered) |
  
 ### Formatting
  
